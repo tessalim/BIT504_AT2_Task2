@@ -26,12 +26,20 @@ public class GameMain extends JPanel implements MouseListener{
 	// the game board 
 	private Board board;
 	 	 
-	//TODO: create the enumeration for the variable below (GameState currentState)
+	//declares the enumeration for the variable below (GameState currentState)
+	public enum GameState {
+		Playing,
+		Draw,
+		Nought_won,
+		Cross_won
+	}
+	
 	//HINT all of the states you require are shown in the code within GameMain
 	private GameState currentState; 
 	
 	// the current player
 	private Player currentPlayer; 
+	
 	// for displaying game status message
 	private JLabel statusBar;       
 	
@@ -56,11 +64,11 @@ public class GameMain extends JPanel implements MouseListener{
 		setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT + 30));
 		
 		
-		// TODO: Create a new instance of the game "Board"class. HINT check the variables above for the correct name
-
+		//creates a new instance of the game "Board"class
+		board = new Board();
 		
-		//TODO: call the method to initialise the game board
-
+		//calls the method to initialise the game board
+		initGame();
 	}
 	
 	public static void main(String[] args) {
@@ -70,12 +78,12 @@ public class GameMain extends JPanel implements MouseListener{
 				//create a main window to contain the panel
 				JFrame frame = new JFrame(TITLE);
 				
-				//TODO: create the new GameMain panel and add it to the frame
-						
+				//creates the new GameMain panel and adds it to the frame
+				frame.add(new GameMain());	
 				
 				
-				//TODO: set the default close operation of the frame to exit_on_close
-		            
+				//sets the default close operation of the frame to exit_on_close
+				frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);  
 				
 				frame.pack();             
 				frame.setLocationRelativeTo(null);
@@ -147,7 +155,7 @@ public class GameMain extends JPanel implements MouseListener{
 				if (board.isDraw ()) {
 					
 				// TODO: set the currentstate to the draw gamestate
-
+				currentState = GameState.Draw;
 			}
 			//otherwise no change to current state of playing
 		}
